@@ -18,22 +18,23 @@ public class Highway {
     public VehicleInfo searchVehicle(String vehicleRegNumber) {
         for (int i = 0; i < vehicles.size(); i++) {
             if (vehicles.get(i).getVehicleRegNumber().equals(vehicleRegNumber)) {
-                return vehicles.get(i); //TODO: nie wiem jak tu użyć tej metody carInfo
+                return vehicles.get(i);
             } else {
                 System.out.println("This registration number does not exist in the database.");
             }
+            carInfo(vehicles.get(i).getVehicleRegNumber());
         }
         return null;
     }
-    private void carInfo(String vehicleRegNumber, CarType carType) {
+    private void carInfo(String vehicleRegNumber) {
         System.out.println("This vehicle entered the highway at " + searchVehicle(vehicleRegNumber).getEnterTime());
-        System.out.println("The type of the vehicle: " + carType);
+        System.out.println("The type of the vehicle: " + searchVehicle(vehicleRegNumber).getCarType());
     }
 
 
 
     public void vehicleLeave(String vehicleRegNumber) {
-        searchVehicle(vehicleRegNumber).countFee(); //TODO: czemu nie mogę użyć metody countFee?
+        countFee(searchVehicle(vehicleRegNumber).getVehicleRegNumber(), searchVehicle(vehicleRegNumber).getCarType());
         vehicles.remove(searchVehicle(vehicleRegNumber));
         System.out.println("This vehicle has been removed from the database.");
 
