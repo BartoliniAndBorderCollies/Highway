@@ -1,18 +1,17 @@
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class VehicleInfo {
 
     private String vehicleRegNumber;
     private CarType carType;
-    private Date date; //TODO: tutaj może jeden field, który zawiera w sobie datę i godzinę? locale albo cóś?
-    private Time time; //TODO: nie wiem jaki format jest dla tych dwóch fieldów
+    private LocalDateTime enterTime;
 
-    public VehicleInfo(String vehicleRegNumber, CarType carType, Date date, Time time) {
+    public VehicleInfo(String vehicleRegNumber, CarType carType) {
         this.vehicleRegNumber = vehicleRegNumber;
         this.carType = carType;
-        this.date = date;
-        this.time = time;
+        this.enterTime = LocalDateTime.now();
     }
 
     public String getVehicleRegNumber() {
@@ -23,14 +22,10 @@ public class VehicleInfo {
         return carType;
     }
 
-    public Date getDate() {
-        return date;
+    public LocalDateTime getEnterTime() {
+        return enterTime;
     }
-
-    public Time getTime() {
-        return time;
-    }
-
-
-
 }
+
+
+
