@@ -17,32 +17,32 @@ public class Highway {
 
     public VehicleInfo searchVehicle(String vehicleRegNumber) {
         for (int i = 0; i < vehicles.size(); i++) {
-            if (vehicles.get(i).getVehicleRegNumber().equals(vehicleRegNumber)) {
-                return vehicles.get(i);
+            VehicleInfo vehicle = vehicles.get(i);
+            if (vehicle.getVehicleRegNumber().equals(vehicleRegNumber)) {
+                return vehicle;
             } else {
                 System.out.println("This registration number does not exist in the database.");
             }
-            carInfo(vehicles.get(i).getVehicleRegNumber());
+            carInfo(vehicle);
         }
         return null;
     }
-    private void carInfo(String vehicleRegNumber) {
-        System.out.println("This vehicle entered the highway at " + searchVehicle(vehicleRegNumber).getEnterTime());
-        System.out.println("The type of the vehicle: " + searchVehicle(vehicleRegNumber).getCarType());
+
+    private void carInfo(VehicleInfo vehicle) {
+        System.out.println("This vehicle entered the highway at " + vehicle.getEnterTime());
+        System.out.println("The type of the vehicle: " + vehicle.getCarType());
     }
 
-
-
     public void vehicleLeave(String vehicleRegNumber) {
-        countFee(searchVehicle(vehicleRegNumber).getVehicleRegNumber(), searchVehicle(vehicleRegNumber).getCarType());
-        vehicles.remove(searchVehicle(vehicleRegNumber));
+        VehicleInfo vehicle = searchVehicle(vehicleRegNumber);
+        countFee(vehicle.getVehicleRegNumber(), vehicle.getCarType());
+        vehicles.remove(vehicle);
         System.out.println("This vehicle has been removed from the database.");
-
-
     }
 
     public int countFee(String vehicleRegNumber, CarType carType) {
-        int enterTime = searchVehicle(vehicleRegNumber).getEnterTime().getSecond();
+        VehicleInfo vehicle = searchVehicle(vehicleRegNumber);
+        int enterTime = vehicle.getEnterTime().getSecond();
         int exitTime = LocalDateTime.now().getSecond();
         int totalTime = exitTime - enterTime;
 
@@ -58,6 +58,5 @@ public class Highway {
         System.out.println("Thank you for your trip. Come back again.");
         return sumToBePaid;
     }
-
 
 }
