@@ -19,11 +19,11 @@ public class Highway {
         for (int i = 0; i < vehicles.size(); i++) {
             VehicleInfo vehicle = vehicles.get(i);
             if (vehicle.getVehicleRegNumber().equals(vehicleRegNumber)) {
+                carInfo(vehicle);
                 return vehicle;
             } else {
                 System.out.println("This registration number does not exist in the database.");
             }
-            carInfo(vehicle);
         }
         return null;
     }
