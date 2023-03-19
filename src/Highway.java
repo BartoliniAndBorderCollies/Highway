@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -8,12 +10,24 @@ public class Highway {
 
     public List<VehicleInfo> vehicles = new ArrayList<>();
 
+    public void showMenu() {
+        System.out.println("Welcome to Highway application. What do you want to do?");
+        System.out.println("Type input and press enter for the following options: ");
+        System.out.println("1. Add vehicle to the database.");
+        System.out.println("2. Remove vehicle from the database.");
+        System.out.println("3. Search vehicle.");
+        System.out.println("4. Exit application.");
+
+    }
+
 
     public void vehicleEntry(String vehicleRegNumber, CarType carType) {
         vehicles.add(new VehicleInfo(vehicleRegNumber, carType));
         System.out.println(
                 "New vehicle added. Registration number: " + vehicleRegNumber + " . Type of vehicle: " + carType);
+        System.out.println(" ");
     }
+
 
     public VehicleInfo searchVehicle(String vehicleRegNumber) {
         for (int i = 0; i < vehicles.size(); i++) {
@@ -26,6 +40,7 @@ public class Highway {
             }
         }
         return null;
+
     }
 
     private void carInfo(VehicleInfo vehicle) {
@@ -38,6 +53,7 @@ public class Highway {
         countFee(vehicle.getVehicleRegNumber(), vehicle.getCarType());
         vehicles.remove(vehicle);
         System.out.println("This vehicle has been removed from the database.");
+        System.out.println(" ");
     }
 
     public int countFee(String vehicleRegNumber, CarType carType) {

@@ -10,19 +10,15 @@ public class Main {
 
         Highway a1Highway = new Highway();
         boolean goBackToMenu = true;
-
-        do {
-        System.out.println("Welcome to Highway application. What do you want to do?");
-        System.out.println("Type input and press enter for the following options: ");
-        System.out.println("1. Add vehicle to the database.");
-        System.out.println("2. Remove vehicle from the database.");
-        System.out.println("3. Search vehicle.");
-        System.out.println("4. Exit application.");
         int response;
         String responseRegNumber;
         CarType responseCarType;
-
         int carType;
+
+        a1Highway.showMenu();
+
+        do {
+
         Scanner scan = new Scanner(System.in);
         response = scan.nextInt();
 
@@ -41,41 +37,31 @@ public class Main {
                     responseCarType = CarType.MOTORCYCLE;
                 }
                 a1Highway.vehicleEntry(responseRegNumber, responseCarType);
+                a1Highway.showMenu();
             }
-            while (goBackToMenu); //TODO: nie wiem jak zrobić, żeby wrócił znowu do samego początku
-
-
 
             if (response == 2) {
                 String responseLeave;
                 System.out.println("Enter registration number of the vehicle which is leaving the highway: ");
                 responseLeave = scan.next();
+
                 a1Highway.vehicleLeave(responseLeave);
+                a1Highway.showMenu();
             }
             if (response == 3) {
                 boolean repeatLoop;
                 String registrationInput;
                 System.out.println("Enter the vehicle registration number: ");
-                do {
-                    registrationInput = scan.next();
-
-                    repeatLoop = (registrationInput.matches("[aA-zZ]*"));
-                    if (repeatLoop) {
-                        System.out.println("Registration number must contain letters and numbers");
-                    }
-                } while (repeatLoop);
-
+                registrationInput = scan.next();
                 a1Highway.searchVehicle(registrationInput);
+                a1Highway.showMenu();
             }
             if (response == 4) {
                 System.exit(4);
 
             }
 
-
         }while(goBackToMenu);
-
-
     }
 }
 
