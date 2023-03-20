@@ -1,9 +1,5 @@
-import org.w3c.dom.ls.LSOutput;
-
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class Highway {

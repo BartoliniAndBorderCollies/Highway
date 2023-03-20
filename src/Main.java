@@ -1,26 +1,35 @@
-import java.nio.channels.GatheringByteChannel;
-import java.time.LocalDateTime;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static java.util.function.Predicate.not;
 
 
 public class Main {
     public static void main(String[] args) {
 
         Highway a1Highway = new Highway();
-        boolean goBackToMenu = true;
+
         int response;
         String responseRegNumber;
         CarType responseCarType;
         int carType;
+        Scanner scan = new Scanner(System.in);
+
 
         a1Highway.showMenu();
 
         do {
-
-        Scanner scan = new Scanner(System.in);
+            try{
         response = scan.nextInt();
+
+            } catch (InputMismatchException e) {
+
+                System.out.println("Number must be an integer.");
+                while(true);
+
+            }
+
+
+
 
             if (response == 1) {
                 System.out.println("Enter registration number: ");
@@ -49,7 +58,6 @@ public class Main {
                 a1Highway.showMenu();
             }
             if (response == 3) {
-                boolean repeatLoop;
                 String registrationInput;
                 System.out.println("Enter the vehicle registration number: ");
                 registrationInput = scan.next();
@@ -59,9 +67,13 @@ public class Main {
             if (response == 4) {
                 System.exit(4);
 
+            } else {
+                System.out.println("Number must be an integer from 1 to 4.");
+                System.out.println(" ");
+                a1Highway.showMenu();
             }
 
-        }while(goBackToMenu);
+        }while(true);
     }
 }
 
