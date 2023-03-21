@@ -12,24 +12,27 @@ public class Main {
         CarType responseCarType;
         Scanner scan = new Scanner(System.in);
 
+
         a1Highway.showMenu();
 
         do {
-            int response;
-            boolean integer;
+            int response = 0;
+            boolean isInteger;
             int carType;
             do {
-                try {
 
-                    response = scan.nextInt();
-                    integer = false;
+                    isInteger = scan.hasNextInt();
+                    scan.nextLine();
+                    if(isInteger) {
+                        response = scan.nextInt();
 
-                } catch (InputMismatchException e) {
-                    integer = true;
+                    } else {
+                        System.out.println("Number must be an integer.");
+                    }
+                    scan.nextLine();//:TODO czemu to jest tu użyte?
 
-                    System.out.println("Number must be an integer.");
-                }
-            }while(integer);
+
+            }while(!isInteger);
 
 
             if (response == 1) {
@@ -39,6 +42,7 @@ public class Main {
                 System.out.println("type: ");
                 System.out.println("1 for car, 2 for truck, 3 for motorcycle.");
                 carType = scan.nextInt();
+                scan.nextLine();
                 if (carType == 1) {
                     responseCarType = CarType.CAR;
                 } else if (carType == 2) {
@@ -52,7 +56,7 @@ public class Main {
 
             if (response == 2) {
                 System.out.println("Enter registration number of the vehicle which is leaving the highway: ");
-                String responseLeave = scan.next();
+                String responseLeave = scan.nextLine();
 
                 a1Highway.vehicleLeave(responseLeave);
                 a1Highway.showMenu();
