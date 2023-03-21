@@ -38,6 +38,7 @@ public class Main {
             if (response == 1) {
                 System.out.println("Enter registration number: ");
                 responseRegNumber = scan.nextLine();
+                a1Highway.vehicleCheck(responseRegNumber);
                 System.out.println("Enter vehicle type:");
                 System.out.println("type: ");
                 System.out.println("1 for car, 2 for truck, 3 for motorcycle.");

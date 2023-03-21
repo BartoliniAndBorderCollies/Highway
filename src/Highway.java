@@ -19,11 +19,25 @@ public class Highway {
 
     public void vehicleEntry(String vehicleRegNumber, CarType carType) {
         vehicles.add(new VehicleInfo(vehicleRegNumber, carType));
+
         System.out.println(
                 "New vehicle added. Registration number: " + vehicleRegNumber + " . Type of vehicle: " + carType);
         System.out.println(" ");
     }
 
+    public void vehicleCheck(String vehicleRegNumber) {
+        for (int i = 0; i < vehicles.size(); i++) {
+            VehicleInfo vehicle = vehicles.get(i);
+
+            if (vehicle.getVehicleRegNumber().equals(vehicleRegNumber)) {
+                System.out.println("This vehicle is already on the highway.");
+                System.out.println("Try again.");
+                System.out.println(" ");
+            }
+            showMenu();
+        }
+
+    }
 
     public VehicleInfo searchVehicle(String vehicleRegNumber) {
         for (int i = 0; i < vehicles.size(); i++) {
@@ -47,7 +61,7 @@ public class Highway {
 
     public void vehicleLeave(String vehicleRegNumber) {
         VehicleInfo vehicle = searchVehicle(vehicleRegNumber);
-        if(vehicle == null){
+        if (vehicle == null) {
             return;
         }
         countFee(vehicle.getVehicleRegNumber(), vehicle.getCarType());
