@@ -8,32 +8,33 @@ public class Main {
 
         Highway a1Highway = new Highway();
 
-        int response;
         String responseRegNumber;
         CarType responseCarType;
-        int carType;
         Scanner scan = new Scanner(System.in);
-
 
         a1Highway.showMenu();
 
         do {
-            try{
-        response = scan.nextInt();
+            int response;
+            boolean integer;
+            int carType;
+            do {
+                try {
 
-            } catch (InputMismatchException e) {
+                    response = scan.nextInt();
+                    integer = false;
 
-                System.out.println("Number must be an integer.");
-                while(true);
+                } catch (InputMismatchException e) {
+                    integer = true;
 
-            }
-
-
+                    System.out.println("Number must be an integer.");
+                }
+            }while(integer);
 
 
             if (response == 1) {
                 System.out.println("Enter registration number: ");
-                responseRegNumber = scan.next();
+                responseRegNumber = scan.nextLine();
                 System.out.println("Enter vehicle type:");
                 System.out.println("type: ");
                 System.out.println("1 for car, 2 for truck, 3 for motorcycle.");
@@ -50,17 +51,15 @@ public class Main {
             }
 
             if (response == 2) {
-                String responseLeave;
                 System.out.println("Enter registration number of the vehicle which is leaving the highway: ");
-                responseLeave = scan.next();
+                String responseLeave = scan.next();
 
                 a1Highway.vehicleLeave(responseLeave);
                 a1Highway.showMenu();
             }
             if (response == 3) {
-                String registrationInput;
                 System.out.println("Enter the vehicle registration number: ");
-                registrationInput = scan.next();
+                String registrationInput = scan.nextLine();
                 a1Highway.searchVehicle(registrationInput);
                 a1Highway.showMenu();
             }
