@@ -7,15 +7,16 @@ public class Highway {
     public List<VehicleInfo> vehicles = new ArrayList<>();
 
     public void showMenu() {
-        System.out.println("Welcome to Highway application. What do you want to do?");
-        System.out.println("Type input and press enter for the following options: ");
-        System.out.println("1. Add vehicle to the database.");
-        System.out.println("2. Remove vehicle from the database.");
-        System.out.println("3. Search vehicle.");
-        System.out.println("4. Exit application.");
 
-    }
-
+        System.out.println("""
+                Welcome to Highway application. What do you want to do?
+                Type input and press enter for the following options:
+                1. Add vehicle to the database.
+                2. Remove vehicle from the database.
+                3. Search vehicle.
+                4. Exit application
+                """);
+        }
 
     public void vehicleEntry(String vehicleRegNumber, CarType carType) {
         vehicles.add(new VehicleInfo(vehicleRegNumber, carType));
@@ -25,7 +26,7 @@ public class Highway {
         System.out.println(" ");
     }
 
-    public void vehicleCheck(String vehicleRegNumber) {
+    public boolean checkIfExist(String vehicleRegNumber) {
         for (int i = 0; i < vehicles.size(); i++) {
             VehicleInfo vehicle = vehicles.get(i);
 
@@ -33,10 +34,11 @@ public class Highway {
                 System.out.println("This vehicle is already on the highway.");
                 System.out.println("Try again.");
                 System.out.println(" ");
+                return true;
             }
-            showMenu();
-        }
 
+        }
+        return false;
     }
 
     public VehicleInfo searchVehicle(String vehicleRegNumber) {
@@ -64,20 +66,19 @@ public class Highway {
         if (vehicle == null) {
             return;
         }
-        countFee(vehicle.getVehicleRegNumber(), vehicle.getCarType());
+        countFee(vehicle);
         vehicles.remove(vehicle);
         System.out.println("This vehicle has been removed from the database.");
         System.out.println(" ");
     }
 
-    public int countFee(String vehicleRegNumber, CarType carType) {
-        VehicleInfo vehicle = searchVehicle(vehicleRegNumber);
+    private void countFee(VehicleInfo vehicle) {
         int enterTime = vehicle.getEnterTime().getSecond();
         int exitTime = LocalDateTime.now().getSecond();
         int totalTime = exitTime - enterTime;
 
         int sumToBePaid;
-        if (carType == CarType.CAR || carType == CarType.MOTORCYCLE) {
+        if (vehicle.getCarType() == CarType.CAR || vehicle.getCarType() == CarType.MOTORCYCLE) {
             sumToBePaid = 2 * totalTime;
 
         } else {
@@ -86,7 +87,6 @@ public class Highway {
         }
         System.out.println("To be paid: " + sumToBePaid + " $");
         System.out.println("Thank you for your trip. Come back again.");
-        return sumToBePaid;
     }
 
 }
