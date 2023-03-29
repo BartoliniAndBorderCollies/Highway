@@ -34,7 +34,6 @@ public class Main {
 
             }while(!isInteger);
 
-
             if (response == 1) {
                 System.out.println("Enter registration number: ");
                 responseRegNumber = scan.nextLine();
